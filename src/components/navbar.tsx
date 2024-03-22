@@ -1,84 +1,250 @@
-import { Link } from '@tanstack/react-router';
-import { Sheet, SheetTrigger, SheetContent } from './ui/sheet';
-import { Button } from './ui/button';
-import SearchBar from './searchBar';
-import Lightswitch from './lightswitch';
+import { Link } from "@tanstack/react-router";
+import { Sheet, SheetTrigger, SheetContent } from "./ui/sheet";
+import { Button } from "./ui/button";
+import SearchBar from "./searchBar";
+import Lightswitch from "./lightswitch";
+import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+	navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from "./ui/collapsible";
+import { ScrollArea } from "./ui/scroll-area";
 
 const activeProps = {
 	style: {
-		fontWeight: 'bold',
+		fontWeight: "bold",
 	},
 };
 
-const menuStyle =
-	'flex h-9 w-max items-center justify-center rounded-md px-4 py-2  font-medium transition-colors hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50';
+const capitalize = (string: string) => {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 interface MyComponentProps {
 	className?: string;
 }
 
+export const target = [
+	"abductors",
+	"abs",
+	"adductors",
+	"biceps",
+	"calves",
+	"cardiovascular system",
+	"delts",
+	"forearms",
+	"glutes",
+	"hamstrings",
+	"lats",
+	"levator scapulae",
+	"pectorals",
+	"quads",
+	"sartorius",
+	"serratus anterior",
+	"spine",
+	"traps",
+	"triceps",
+	"upper back",
+];
+
+export const equipment = [
+	"assisted",
+	"band",
+	"barbell",
+	"body weight",
+	"bosu ball",
+	"cable",
+	"dumbbell",
+	"elliptical machine",
+	"ez barbell",
+	"hammer",
+	"kettlebell",
+	"leverage machine",
+	"medicine ball",
+	"olympic barbell",
+	"resistance band",
+	"roller",
+	"rope",
+	"skierg machine",
+	"sled machine",
+	"smith machine",
+	"stability ball",
+	"stationary bike",
+	"stepmill machine",
+	"tire",
+	"trap bar",
+	"upper body ergometer",
+	"weighted",
+	"wheel roller",
+];
+
+export const bodypart = [
+	"back",
+	"cardio",
+	"chest",
+	"lower arms",
+	"lower legs",
+	"neck",
+	"shoulders",
+	"upper arms",
+	"upper legs",
+	"waist",
+];
+
 const Navbar = () => {
 	return (
-		<header className='flex h-20 w-full items-center px-4 md:px-6 shadow-foreground shadow-sm sticky'>
+		<header className="sticky top-0 flex items-center w-full h-20 px-4 shadow-sm md:px-6 shadow-foreground bg-background z-[2]">
 			<Sheet>
 				<SheetTrigger asChild>
 					<Button
-						className='lg:hidden absolute right-4'
-						size='icon'
-						variant='outline'
+						className="absolute lg:hidden right-4"
+						size="icon"
+						variant="outline"
 					>
-						<MenuIcon className='h-6 w-6' />
-						<span className='sr-only'>Navigation Menu</span>
+						<MenuIcon className="w-6 h-6" />
+						<span className="sr-only">Navigation Menu</span>
 					</Button>
 				</SheetTrigger>
-				<SheetContent side='right'>
-					<div className='grid gap-2 py-6'>
-						<Link
-							className='flex w-full items-center py-2 text-lg font-semibold'
-							to='/'
-							activeProps={activeProps}
-						>
+
+				<SheetContent
+					side="right"
+					className="flex flex-col gap-3 text-lg font-medium"
+				>
+					<ScrollArea className="flex flex-col h-full leading-9">
+						<Link to="/" activeProps={activeProps} className="block">
 							Home
 						</Link>
-						<Link
-							className='flex w-full items-center py-2 text-lg font-semibold'
-							to='/exercises'
-							activeProps={activeProps}
-						>
+						<Link to="/exercises" activeProps={activeProps} className="block">
 							Exercises
 						</Link>
-						<Link
-							className='flex w-full items-center py-2 text-lg font-semibold'
-							href='#'
-						>
-							Services
-						</Link>
-						<Link
-							className='flex w-full items-center py-2 text-lg font-semibold'
-							href='#'
-						>
-							Contact
-						</Link>
-					</div>
+						<Collapsible>
+							<CollapsibleTrigger>Target</CollapsibleTrigger>
+							<CollapsibleContent>
+								{target.map((target) => (
+									<Link
+										to={target && `/target/${target}`}
+										activeProps={activeProps}
+										className="flex flex-col py-1 text-sm hover:font-bolder hover:text-orange-500 indent-4"
+									>
+										{capitalize(target)}
+									</Link>
+								))}
+							</CollapsibleContent>
+						</Collapsible>
+						<Collapsible>
+							<CollapsibleTrigger>Body Parts</CollapsibleTrigger>
+							<CollapsibleContent>
+								{bodypart.map((bodypart) => (
+									<Link
+										to={bodypart && `/bodypart/${bodypart}`}
+										activeProps={activeProps}
+										className="flex flex-col py-1 text-sm hover:font-bolder hover:text-orange-500 indent-4"
+									>
+										{capitalize(bodypart)}
+									</Link>
+								))}
+							</CollapsibleContent>
+						</Collapsible>
+						<Collapsible>
+							<CollapsibleTrigger>Equipment</CollapsibleTrigger>
+							<CollapsibleContent>
+								{equipment.map((equipment) => (
+									<Link
+										to={equipment && `/equipment/${equipment}`}
+										activeProps={activeProps}
+										className="flex flex-col py-1 text-sm hover:font-bolder hover:text-orange-500 indent-4"
+									>
+										{capitalize(equipment)}
+									</Link>
+								))}
+							</CollapsibleContent>
+						</Collapsible>
+					</ScrollArea>
 				</SheetContent>
 			</Sheet>
 			<Lightswitch />
-			<div className='hidden lg:block ml-2'>
-				<SearchBar />
-			</div>
-			<nav className='ml-auto hidden lg:flex gap-6'>
-				<Link className={menuStyle} to='/' activeProps={activeProps}>
-					Home
-				</Link>
-				<Link className={menuStyle} to='/exercises' activeProps={activeProps}>
-					Exercises
-				</Link>
-				<Link className={menuStyle} href='#'>
-					Services
-				</Link>
-				<Link className={menuStyle} href='#'>
-					Contact
-				</Link>
+
+			<SearchBar />
+
+			<nav className="hidden gap-6 ml-auto lg:flex">
+				<NavigationMenu>
+					<NavigationMenuList>
+						<NavigationMenuItem>
+							<Link to="/" activeProps={activeProps}>
+								<NavigationMenuLink className={navigationMenuTriggerStyle()}>
+									Home
+								</NavigationMenuLink>
+							</Link>
+						</NavigationMenuItem>
+						<NavigationMenuItem>
+							<Link to="/exercises" activeProps={activeProps}>
+								<NavigationMenuLink className={navigationMenuTriggerStyle()}>
+									Exercises
+								</NavigationMenuLink>
+							</Link>
+						</NavigationMenuItem>
+						<NavigationMenuItem>
+							<NavigationMenuTrigger>Target</NavigationMenuTrigger>
+							<NavigationMenuContent className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+								{target.map((target) => (
+									<Link
+										to={target && `/target/${target}`}
+										activeProps={activeProps}
+									>
+										<NavigationMenuLink
+											className={navigationMenuTriggerStyle()}
+										>
+											{capitalize(target)}
+										</NavigationMenuLink>
+									</Link>
+								))}
+							</NavigationMenuContent>
+						</NavigationMenuItem>
+						<NavigationMenuItem>
+							<NavigationMenuTrigger>Body Part</NavigationMenuTrigger>
+							<NavigationMenuContent className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+								{bodypart.map((bodypart) => (
+									<Link
+										to={bodypart && `/bodypart/${bodypart}`}
+										activeProps={activeProps}
+									>
+										<NavigationMenuLink
+											className={navigationMenuTriggerStyle()}
+										>
+											{capitalize(bodypart)}
+										</NavigationMenuLink>
+									</Link>
+								))}
+							</NavigationMenuContent>
+						</NavigationMenuItem>
+						<NavigationMenuItem>
+							<NavigationMenuTrigger>Equipment</NavigationMenuTrigger>
+							<NavigationMenuContent className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+								{equipment.map((equipment) => (
+									<Link
+										to={equipment && `/equipment/${equipment}`}
+										activeProps={activeProps}
+									>
+										<NavigationMenuLink
+											className={navigationMenuTriggerStyle()}
+										>
+											{capitalize(equipment)}
+										</NavigationMenuLink>
+									</Link>
+								))}
+							</NavigationMenuContent>
+						</NavigationMenuItem>
+					</NavigationMenuList>
+				</NavigationMenu>
 			</nav>
 		</header>
 	);
@@ -87,20 +253,22 @@ const Navbar = () => {
 function MenuIcon(props: MyComponentProps) {
 	return (
 		<svg
+			aria-label="nav-menu"
 			{...props}
-			xmlns='http://www.w3.org/2000/svg'
-			width='24'
-			height='24'
-			viewBox='0 0 24 24'
-			fill='none'
-			stroke='currentColor'
-			strokeWidth='2'
-			strokeLinecap='round'
-			strokeLinejoin='round'
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
 		>
-			<line x1='4' x2='20' y1='12' y2='12' />
-			<line x1='4' x2='20' y1='6' y2='6' />
-			<line x1='4' x2='20' y1='18' y2='18' />
+			<title>Menu</title>
+			<line x1="4" x2="20" y1="12" y2="12" />
+			<line x1="4" x2="20" y1="6" y2="6" />
+			<line x1="4" x2="20" y1="18" y2="18" />
 		</svg>
 	);
 }

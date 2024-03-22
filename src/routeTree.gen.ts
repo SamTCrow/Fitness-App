@@ -12,8 +12,14 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as TargetIndexImport } from './routes/target/index'
 import { Route as ExercisesIndexImport } from './routes/exercises/index'
+import { Route as EquipmentIndexImport } from './routes/equipment/index'
+import { Route as BodypartIndexImport } from './routes/bodypart/index'
+import { Route as TargetTargetImport } from './routes/target/$target'
 import { Route as ExercisesIdImport } from './routes/exercises/$id'
+import { Route as EquipmentEquipmentImport } from './routes/equipment/$equipment'
+import { Route as BodypartBodypartImport } from './routes/bodypart/$bodypart'
 
 // Create/Update Routes
 
@@ -22,13 +28,43 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const TargetIndexRoute = TargetIndexImport.update({
+  path: '/target/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ExercisesIndexRoute = ExercisesIndexImport.update({
   path: '/exercises/',
   getParentRoute: () => rootRoute,
 } as any)
 
+const EquipmentIndexRoute = EquipmentIndexImport.update({
+  path: '/equipment/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BodypartIndexRoute = BodypartIndexImport.update({
+  path: '/bodypart/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TargetTargetRoute = TargetTargetImport.update({
+  path: '/target/$target',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ExercisesIdRoute = ExercisesIdImport.update({
   path: '/exercises/$id',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EquipmentEquipmentRoute = EquipmentEquipmentImport.update({
+  path: '/equipment/$equipment',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BodypartBodypartRoute = BodypartBodypartImport.update({
+  path: '/bodypart/$bodypart',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -40,12 +76,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/bodypart/$bodypart': {
+      preLoaderRoute: typeof BodypartBodypartImport
+      parentRoute: typeof rootRoute
+    }
+    '/equipment/$equipment': {
+      preLoaderRoute: typeof EquipmentEquipmentImport
+      parentRoute: typeof rootRoute
+    }
     '/exercises/$id': {
       preLoaderRoute: typeof ExercisesIdImport
       parentRoute: typeof rootRoute
     }
+    '/target/$target': {
+      preLoaderRoute: typeof TargetTargetImport
+      parentRoute: typeof rootRoute
+    }
+    '/bodypart/': {
+      preLoaderRoute: typeof BodypartIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/equipment/': {
+      preLoaderRoute: typeof EquipmentIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/exercises/': {
       preLoaderRoute: typeof ExercisesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/target/': {
+      preLoaderRoute: typeof TargetIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -55,8 +115,14 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
+  BodypartBodypartRoute,
+  EquipmentEquipmentRoute,
   ExercisesIdRoute,
+  TargetTargetRoute,
+  BodypartIndexRoute,
+  EquipmentIndexRoute,
   ExercisesIndexRoute,
+  TargetIndexRoute,
 ])
 
 /* prettier-ignore-end */

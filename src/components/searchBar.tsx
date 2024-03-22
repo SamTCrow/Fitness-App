@@ -1,32 +1,37 @@
-import { useState } from 'react';
-import { Search } from 'lucide-react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { useSearch } from './utils/fetchData';
+import { useState } from "react";
+import { Search } from "lucide-react";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { useExerciseByName } from "./utils/fetchData";
 
 const SearchBar = () => {
-	const [search, setSearch] = useState('');
+	const [search, setSearch] = useState("");
 
-	const { refetch } = useSearch(search);
+	const { refetch } = useExerciseByName(search);
 
 	const handleSearch = async () => {
 		if (search) {
 			refetch();
-			setSearch('');
+			setSearch("");
 		}
 	};
 
 	return (
-		<div className='flex py-6 gap-4 max-w-md mx-auto px-4'>
+		<div className="flex max-w-md gap-4 px-4 py-6 -ml-4 scale-75 md:scale-100 md:ml-2">
 			<Input
-				type='text'
-				placeholder='Search Exercise'
+				type="text"
+				placeholder="Search Exercise"
 				value={search}
 				onChange={(e) => {
 					setSearch(e.target.value.toLowerCase());
 				}}
+				onKeyDown={(e) => {
+					if (e.key === "Enter") {
+						handleSearch();
+					}
+				}}
 			/>
-			<Button type='submit' aria-label='search' onClick={handleSearch}>
+			<Button type="submit" aria-label="search" onClick={handleSearch}>
 				<Search />
 			</Button>
 		</div>

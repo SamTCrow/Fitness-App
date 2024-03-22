@@ -1,29 +1,29 @@
-import { Button } from './ui/button';
-import heroGirl from '../assets/images/heroGirl.png';
+import { Button } from "./ui/button";
+import heroGirl from "../assets/images/heroGirl.png";
 
 const Herobanner = () => {
 	return (
-		<div className='mt-4 lg:mt-6 mx-2 sm:mx-4 flex'>
-			<div className='w-full hidden lg:block relative'>
+		<div className="flex mx-2 mb-12 mt-14 sm:mx-4">
+			<div className="relative hidden w-full lg:block">
 				<img
 					src={heroGirl}
-					alt='heroGirl'
-					className='w-full  object-cover rounded-lg'
+					alt="heroGirl"
+					className="object-cover w-full rounded-lg"
 				/>
-				<div className='absolute inset-0 bg-gradient-to-r from-transparent from-75% to-background' />
+				<div className="absolute inset-0 bg-gradient-to-r from-transparent from-75% to-background" />
 			</div>
 
-			<div className='text-center flex flex-col max-w-md mx-auto gap-3 lg:block lg:w-full lg:text-right lg:my-auto'>
-				<h1 className='text-2xl lg:text-5xl font-medium text-orange-600'>
+			<div className="flex flex-col max-w-md gap-3 mx-auto text-center lg:block lg:w-full lg:text-right lg:my-auto">
+				<h1 className="text-2xl font-medium prose text-orange-600 dark:prose-invert lg:text-5xl">
 					FitGang
 				</h1>
-				<h2 className='text-5xl lg:my-6 mx-auto lg:text-7xl font-bold'>
+				<h2 className="mx-auto text-5xl font-bold prose dark:prose-invert lg:my-6 lg:text-7xl">
 					Just Workout
 				</h2>
-				<h2 className='text-2xl lg:my-6 lg:text-4xl '>
+				<h2 className="text-2xl prose dark:prose-invert lg:my-6 lg:text-4xl ">
 					Check our awesome Exercises!
 				</h2>
-				<Button className='mt-4 text-xl rounded-full'>Go training!! </Button>
+				<Button className="mt-4 text-xl rounded-full">Go training!!</Button>
 			</div>
 		</div>
 	);

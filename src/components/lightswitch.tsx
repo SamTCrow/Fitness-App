@@ -8,8 +8,11 @@ const Lightswitch = () => {
 	};
 
 	return (
-		<div>	
-				<Switch aria-label='Toggle dark mode' onCheckedChange={changeTheme} />
+		<div>
+			<Switch
+				aria-label='Toggle dark mode'
+				onCheckedChange={changeTheme}
+			/>
 		</div>
 	);
 };

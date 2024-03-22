@@ -1,19 +1,23 @@
-import {
-	type Exercise,
-	useInfiniteExercises,
-} from "@/components/utils/fetchData";
-import { useInView } from "react-intersection-observer";
 import { createFileRoute } from "@tanstack/react-router";
-import { MoreHorizontal } from "lucide-react";
 import ExerciseCard from "@/components/exerciseCard";
+import {
+	useInfiniteExercises,
+	type Exercise,
+} from "@/components/utils/fetchData";
+import { MoreHorizontal } from "lucide-react";
 import { useEffect } from "react";
-export const Route = createFileRoute("/exercises/")({
-	component: Exercises,
+import { useInView } from "react-intersection-observer";
+
+export const Route = createFileRoute("/bodypart/$bodypart")({
+	component: Bodypart,
 });
 
-function Exercises() {
+function Bodypart() {
+	const { bodypart } = Route.useParams();
 	const { data, hasNextPage, isSuccess, fetchNextPage, isFetching } =
-		useInfiniteExercises("https://exercisedb.p.rapidapi.com/exercises");
+		useInfiniteExercises(
+			`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodypart}`,
+		);
 
 	const { ref, inView } = useInView();
 
@@ -31,10 +35,10 @@ function Exercises() {
 
 	return (
 		<>
-			<div className="grid w-full gap-5 px-5 mt-5 lg:grid-cols-3 md:grid-cols-2">
+			<div className="grid w-full gap-5 px-5 my-5 lg:grid-cols-3 md:grid-cols-2">
 				{content}
 			</div>
-			<MoreHorizontal ref={ref} className="w-8 h-8" />
+			{hasNextPage && <MoreHorizontal ref={ref} className="w-8 h-8" />}
 		</>
 	);
 }
