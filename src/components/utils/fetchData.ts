@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import axios, { type AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 type Bodypart =
 	| "back"
@@ -229,7 +229,7 @@ export const useInfiniteExercises = (url: string) => {
 		queryFn: ({ pageParam }: { pageParam: number }) =>
 			getALotOfData(url, pageParam),
 		initialPageParam: 0,
-		getNextPageParam: (lastPage, allPages, lastPageParam) => {
+		getNextPageParam: (lastPage, _allPages, lastPageParam) => {
 			return lastPage.length < limit ? undefined : lastPageParam + limit;
 		},
 	});
