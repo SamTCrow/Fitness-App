@@ -11,7 +11,7 @@ import { Link } from "@tanstack/react-router";
 import type { Exercise } from "./utils/fetchData";
 export const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
 	return (
-		<Card className="flex flex-col  max-w-[300px] mx-auto cursor-pointer justify-evenly sm:max-w-full w-full">
+		<Card className="flex flex-col  max-w-[300px] mx-auto cursor-pointer justify-evenly sm:max-w-full w-full hover:border-orange-500">
 			<Link to={exercise.id && `/exercises/${exercise.id}`} key={exercise.id}>
 				<CardHeader>
 					<CardTitle className="justify-center prose text-center truncate text-md dark:prose-invert ">

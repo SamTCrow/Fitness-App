@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useExerciseById } from "@/components/utils/fetchData";
+
+import Detail from "@/components/detail";
 export const Route = createFileRoute("/exercises/$id")({
 	component: Exercise,
 });
@@ -8,8 +10,10 @@ function Exercise() {
 	const { data } = useExerciseById(id);
 
 	if (data) {
-		console.log(data);
+		return (
+			<>
+				<Detail {...data} />
+			</>
+		);
 	}
-
-	return <div>Hello /exercise/ {id}!</div>;
 }
