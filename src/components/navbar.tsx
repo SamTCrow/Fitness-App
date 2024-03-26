@@ -18,6 +18,7 @@ import {
 	CollapsibleTrigger,
 } from "./ui/collapsible";
 import { ScrollArea } from "./ui/scroll-area";
+import { nanoid } from "nanoid";
 
 const activeProps = {
 	style: {
@@ -133,6 +134,7 @@ const Navbar = () => {
 							<CollapsibleContent>
 								{target.map((target) => (
 									<Link
+										key={nanoid()}
 										to={target && `/target/${target}`}
 										activeProps={activeProps}
 										className="flex flex-col py-1 text-sm hover:font-bolder hover:text-orange-500 indent-4"
@@ -147,6 +149,7 @@ const Navbar = () => {
 							<CollapsibleContent>
 								{bodypart.map((bodypart) => (
 									<Link
+										key={nanoid()}
 										to={bodypart && `/bodypart/${bodypart}`}
 										activeProps={activeProps}
 										className="flex flex-col py-1 text-sm hover:font-bolder hover:text-orange-500 indent-4"
@@ -161,6 +164,7 @@ const Navbar = () => {
 							<CollapsibleContent>
 								{equipment.map((equipment) => (
 									<Link
+										key={nanoid()}
 										to={equipment && `/equipment/${equipment}`}
 										activeProps={activeProps}
 										className="flex flex-col py-1 text-sm hover:font-bolder hover:text-orange-500 indent-4"
@@ -181,17 +185,21 @@ const Navbar = () => {
 				<NavigationMenu>
 					<NavigationMenuList>
 						<NavigationMenuItem>
-							<Link to="/" activeProps={activeProps}>
-								<NavigationMenuLink className={navigationMenuTriggerStyle()}>
-									Home
-								</NavigationMenuLink>
+							<Link
+								to="/"
+								activeProps={activeProps}
+								className={navigationMenuTriggerStyle()}
+							>
+								Home
 							</Link>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
-							<Link to="/exercises" activeProps={activeProps}>
-								<NavigationMenuLink className={navigationMenuTriggerStyle()}>
-									Exercises
-								</NavigationMenuLink>
+							<Link
+								to="/exercises"
+								activeProps={activeProps}
+								className={navigationMenuTriggerStyle()}
+							>
+								Exercises
 							</Link>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
@@ -199,14 +207,11 @@ const Navbar = () => {
 							<NavigationMenuContent className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 								{target.map((target) => (
 									<Link
+										key={nanoid()}
 										to={target && `/target/${target}`}
 										activeProps={activeProps}
 									>
-										<NavigationMenuLink
-											className={navigationMenuTriggerStyle()}
-										>
-											{capitalize(target)}
-										</NavigationMenuLink>
+										{capitalize(target)}
 									</Link>
 								))}
 							</NavigationMenuContent>
@@ -216,14 +221,11 @@ const Navbar = () => {
 							<NavigationMenuContent className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 								{bodypart.map((bodypart) => (
 									<Link
+										key={nanoid()}
 										to={bodypart && `/bodypart/${bodypart}`}
 										activeProps={activeProps}
 									>
-										<NavigationMenuLink
-											className={navigationMenuTriggerStyle()}
-										>
-											{capitalize(bodypart)}
-										</NavigationMenuLink>
+										{capitalize(bodypart)}
 									</Link>
 								))}
 							</NavigationMenuContent>
@@ -233,14 +235,11 @@ const Navbar = () => {
 							<NavigationMenuContent className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 								{equipment.map((equipment) => (
 									<Link
+										key={nanoid()}
 										to={equipment && `/equipment/${equipment}`}
 										activeProps={activeProps}
 									>
-										<NavigationMenuLink
-											className={navigationMenuTriggerStyle()}
-										>
-											{capitalize(equipment)}
-										</NavigationMenuLink>
+										{capitalize(equipment)}
 									</Link>
 								))}
 							</NavigationMenuContent>

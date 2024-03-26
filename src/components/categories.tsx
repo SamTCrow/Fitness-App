@@ -24,7 +24,7 @@ const Categories = ({ cat, Icon, title, section }: CategoryProps) => {
 			<Carousel className="w-[70%] mx-auto my-4">
 				<CarouselContent className="">
 					{cat?.map((cat) => (
-						<Link to={cat && `/${section.toLowerCase()}/${cat.toLowerCase()}`}>
+						<Link key={nanoid()} to={cat && `/${section.toLowerCase()}/${cat.toLowerCase()}`}>
 							<CarouselItem
 								key={nanoid()}
 								className="flex justify-center h-full lg:basis-1/4 md:basis-1/3 basis-1"

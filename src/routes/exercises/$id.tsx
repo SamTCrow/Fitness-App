@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useExerciseById } from "@/components/utils/fetchData";
-
+import ExerciseVideos from "@/components/ExerciseVideos";
 import Detail from "@/components/detail";
 export const Route = createFileRoute("/exercises/$id")({
 	component: Exercise,
@@ -13,6 +13,7 @@ function Exercise() {
 		return (
 			<>
 				<Detail {...data} />
+				<ExerciseVideos name={data.name} />
 			</>
 		);
 	}

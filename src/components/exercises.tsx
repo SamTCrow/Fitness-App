@@ -1,5 +1,6 @@
 import { useExerciseByName } from "./utils/fetchData";
 import { ExerciseCard } from "./exerciseCard";
+import { nanoid } from "nanoid";
 
 const Exercises = () => {
 	const { data } = useExerciseByName("");
@@ -11,7 +12,7 @@ const Exercises = () => {
 			</h1>
 			<div className="grid w-full gap-5 px-10 mb-5 lg:grid-cols-3 md:grid-cols-2">
 				{data?.map((exercise) => (
-					<ExerciseCard exercise={exercise} />
+					<ExerciseCard key={nanoid()} exercise={exercise} />
 				))}
 			</div>
 		</>

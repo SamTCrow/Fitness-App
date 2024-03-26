@@ -1,5 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useEffect } from "react";
+import { YouTube } from "youtube-sr";
 
 type Bodypart =
 	| "back"
@@ -63,6 +65,18 @@ export type Target =
 	| "traps"
 	| "triceps"
 	| "upper back";
+
+export type YouTubeVideo = {
+	video: {
+		channelId: string;
+		channelName: string;
+		lengthText: string;
+		publishedTimeText: string;
+		title: string;
+		videoId: string;
+		viewCountText: string;
+	};
+};
 
 export type Exercise = {
 	bodyPart: string;
@@ -231,6 +245,40 @@ export const useInfiniteExercises = (url: string) => {
 		initialPageParam: 0,
 		getNextPageParam: (lastPage, _allPages, lastPageParam) => {
 			return lastPage.length < limit ? undefined : lastPageParam + limit;
+		},
+	});
+};
+
+const getVideo = async (query: string) => {
+	const options = {
+		method: "GET",
+		url: "https://youtube-search-and-download.p.rapidapi.com/search",
+		params: {
+			query: query,
+			type: "v",
+			duration: "s",
+			sort: "r",
+		},
+		headers: {
+			"X-RapidAPI-Key": "68f796fbffmsh3d40cbdc8cda221p1f774ejsn74e089bd5704",
+			"X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
+		},
+	};
+
+	try {
+		const response = await axios.request(options);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const useVideo = (query: string) => {
+	return useQuery({
+		queryKey: ["video", query],
+		queryFn: async () => {
+			const results = await getVideo(query);
+			return results.contents.slice(0, 4) as YouTubeVideo[];
 		},
 	});
 };
