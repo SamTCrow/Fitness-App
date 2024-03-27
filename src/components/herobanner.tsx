@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import heroGirl from "../assets/images/heroGirl.png";
+import heroGirl from "../assets/images/heroGirl.webp";
 
 const Herobanner = () => {
 	return (
@@ -9,6 +9,7 @@ const Herobanner = () => {
 					src={heroGirl}
 					alt="heroGirl"
 					className="object-cover w-full rounded-lg"
+					loading="lazy"
 				/>
 				<div className="absolute inset-0 bg-gradient-to-r from-transparent from-75% to-background" />
 			</div>

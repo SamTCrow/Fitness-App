@@ -1,7 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect } from "react";
-import { YouTube } from "youtube-sr";
 
 type Bodypart =
 	| "back"
